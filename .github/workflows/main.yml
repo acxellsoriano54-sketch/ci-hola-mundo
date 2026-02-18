@@ -1,0 +1,24 @@
+name: Notificacion CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notificar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ejecutar Hola Mundo
+        run: node index.js
+
+      - name: Enviar notificacion
+        run: |
+          curl -H "Title: Nuevo Push " \
+               -H "Priority: 5" \
+               -d "Se subió código a la rama main." \
+               https://ntfy.sh/devops-itla
